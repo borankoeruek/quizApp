@@ -1,23 +1,21 @@
 package com.borankoeruek.quizapp.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Table("Quiz")
+@Entity
 public class Quiz {
-    public Quiz() {
-    }
-
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String name;
 
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
+    // Getters and Setters
     public UUID getId() {
         return id;
     }
@@ -41,6 +39,4 @@ public class Quiz {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
-
 }

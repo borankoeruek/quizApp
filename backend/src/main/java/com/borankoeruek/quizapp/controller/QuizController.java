@@ -13,7 +13,6 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-
     @GetMapping("/quiz/{id}")
     public Quiz get(@PathVariable UUID id) {
         return quizService.get(id);

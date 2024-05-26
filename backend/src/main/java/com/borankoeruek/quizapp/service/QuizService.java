@@ -11,18 +11,22 @@ import java.util.UUID;
 @Service
 public class QuizService {
 
-    @Autowired
-    private QuizRepository quizRepository;
+	@Autowired
+	private QuizRepository quizRepository;
 
-    public Quiz get(UUID id) {
-        return quizRepository.findById(id).orElse(null);
-    }
+	public Quiz get(UUID id) {
+		return quizRepository.findById(id).orElse(null);
+	}
 
-    public void set(Quiz quiz) {
-        quizRepository.save(quiz);
-    }
+	public void set(Quiz quiz) {
+		if (quizRepository.findByName(quiz.getName()).isPresent()) {
+			throw new IllegalStateException("name taken");
+		} else {
+			quizRepository.save(quiz);
+		}
+	}
 
-    public List<Quiz> getAll() {
-        return quizRepository.findAll();
-    }
+	public List<Quiz> getAll() {
+		return quizRepository.findAll();
+	}
 }

@@ -10,7 +10,9 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String text;
+    private String name;
+
+    private boolean isValid;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -25,12 +27,12 @@ public class Answer {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Question getQuestion() {
@@ -40,4 +42,13 @@ public class Answer {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
 }

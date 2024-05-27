@@ -1,20 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Quiz} from "../../../../../backend-model/Quiz";
-import {NgForOf} from "@angular/common";
-import {QuizHttpService} from "../../services/quiz-http.service";
+import { Component, OnInit } from '@angular/core';
+import { Quiz } from '../../../../../backend-model/Quiz';
+import { QuizHttpService } from '../../services/quiz-http.service';
 
 @Component({
   selector: 'app-quiz-list',
   templateUrl: './quiz-list-overview.component.html',
-  styleUrl: './quiz-list-overview.component.css'
+  styleUrl: './quiz-list-overview.component.css',
 })
-export class QuizListOverviewComponent implements OnInit{
-  constructor(private quizService: QuizHttpService) {
-  }
-
+export class QuizListOverviewComponent implements OnInit {
   public quizList: Quiz[];
 
+  constructor(private quizHttpService: QuizHttpService) {}
+
   ngOnInit(): void {
-    this.quizService.fetchAllQuiz().subscribe(quizList => this.quizList = quizList);
+    this.quizHttpService
+      .fetchAllQuiz()
+      .subscribe((quizList) => (this.quizList = quizList));
   }
 }

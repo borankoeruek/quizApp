@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../../../../backend-model/Quiz';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizHttpService {
-  private BACKEND_URL = 'http://localhost:8080';
+  private BACKEND_URL = '/api';
 
   constructor(private http: HttpClient) {}
 

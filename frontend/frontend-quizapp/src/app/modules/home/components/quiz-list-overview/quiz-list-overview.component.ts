@@ -17,4 +17,8 @@ export class QuizListOverviewComponent implements OnInit {
       .fetchAllQuiz()
       .subscribe((quizList) => (this.quizList = quizList));
   }
+
+  public test(l: any) {
+    console.log(l);
+  }
 }

@@ -1,0 +1,62 @@
+<h4>Create a Quiz!</h4>
+
+<mat-stepper #stepper linear>
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup">
+      <ng-template matStepLabel>Fill out your quiz name</ng-template>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="name" required>
+      </mat-form-field>
+      <div class="d-flex justify-content-end">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup" label="Create questions">
+    <div class="d-flex">
+      <div class="col-9">
+        <mat-selection-list>
+          <mat-list-item (click)="loadQuestionToSidebar(question)"
+                         *ngFor="let question of questionList">{{ question.name }}
+          </mat-list-item>
+        </mat-selection-list>
+      </div>
+      <div class="d-flex w-100 justify-content-end">
+        <button (click)="toggleAddQuestionDialog(true)" aria-label="Add new question" color="primary" mat-icon-button>
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+
+
+      <ng-template #addQuestionDialog>
+        <h2 mat-dialog-title>Add question </h2>
+        <mat-dialog-content>
+          <mat-form-field>
+            <mat-label>Question text</mat-label>
+            <input #questionName matInput placeholder="name">
+          </mat-form-field>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+          <button (click)="toggleAddQuestionDialog(false)" mat-button>Cancel</button>
+          <button (click)="createNewQuestion(questionName.value)" cdkFocusInitial mat-button>Ok</button>
+        </mat-dialog-actions>
+      </ng-template>
+
+    </div>
+
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button (click)="stepper.reset()" mat-button>Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

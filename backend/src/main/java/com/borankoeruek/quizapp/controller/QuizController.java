@@ -5,26 +5,27 @@ import com.borankoeruek.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class QuizController {
 
-    @Autowired
-    private QuizService quizService;
+	@Autowired
+	private QuizService quizService;
 
-    @GetMapping("/quiz/{id}")
-    public Quiz get(@PathVariable UUID id) {
-        return quizService.get(id);
-    }
+	@GetMapping("/api/quiz/{id}")
+	public Quiz get(@PathVariable UUID id) {
+		return quizService.get(id);
+	}
 
-    @GetMapping("/all-quiz")
-    public List<Quiz> getAll() {
-        return quizService.getAll();
-    }
+	@GetMapping("/api/all-quiz")
+	public List<Quiz> getAll() {
+		return quizService.getAll();
+	}
 
-    @PostMapping("/quiz")
-    public void set(@RequestBody Quiz quiz) {
-        quizService.set(quiz);
-    }
+	@PostMapping("/api/quiz")
+	public void set(@RequestBody Quiz quiz) {
+		quizService.set(quiz);
+	}
 }

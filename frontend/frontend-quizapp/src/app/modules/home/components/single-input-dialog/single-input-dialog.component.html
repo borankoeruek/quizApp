@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{ inputLabel }}</mat-label>
+    <input #input matInput placeholder={{inputLabel}}>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="closeDialog()" mat-button>Cancel</button>
+  <button (click)="outputInput.emit(input.value)" cdkFocusInitial mat-button>Ok</button>
+</mat-dialog-actions>

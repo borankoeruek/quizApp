@@ -9,10 +9,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { QuizAnswerCreationDialogComponent } from './components/quiz-answer-creation-dialog/quiz-answer-creation-dialog.component';
+import { SingleInputDialogComponent } from './components/single-input-dialog/single-input-dialog.component';
 
 @NgModule({
-  declarations: [QuizListOverviewComponent, QuizCreationComponent],
+  declarations: [
+    QuizListOverviewComponent,
+    QuizCreationComponent,
+    QuizAnswerCreationDialogComponent,
+    SingleInputDialogComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -25,6 +36,7 @@ import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatDialogActions,
     MatDialogContent,
+    MatDialogTitle,
   ],
 })
 export class HomeModule {}

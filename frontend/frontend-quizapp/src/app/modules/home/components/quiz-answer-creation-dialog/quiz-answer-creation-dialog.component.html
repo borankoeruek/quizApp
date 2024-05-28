@@ -1,1 +1,28 @@
-<p>quiz-answer-creation-dialog works!</p>
+<h2 mat-dialog-title>Add question </h2>
+<mat-dialog-content>
+  <div class="d-flex">
+
+    <div class="col-11"></div>
+    <mat-selection-list>
+      <mat-list-item
+        *ngFor="let answer of question.answers">{{ answer.name }}
+
+        <ng-template>
+
+        </ng-template>
+      </mat-list-item>
+
+      <div class="d-flex w-100 justify-content-end">
+        <button (click)="(true)" aria-label="Add new question" color="primary" mat-icon-button>
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+
+    </mat-selection-list>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="(false)" mat-button>Cancel</button>
+  <button cdkFocusInitial mat-button>Ok</button>
+</mat-dialog-actions>

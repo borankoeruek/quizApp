@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class QuizCreationComponent implements OnInit {
   public formGroup: FormGroup;
-
+  public selectedQuestion: Question;
   @ViewChild('addQuestionDialog')
   private addQuestionDialog: TemplateRef<any>;
 

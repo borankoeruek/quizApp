@@ -29,20 +29,11 @@
       </div>
 
 
-      <ng-template #addQuestionDialog>
-        <h2 mat-dialog-title>Add question </h2>
-        <mat-dialog-content>
-          <mat-form-field>
-            <mat-label>Question text</mat-label>
-            <input #questionName matInput placeholder="name">
-          </mat-form-field>
-        </mat-dialog-content>
-        <mat-dialog-actions>
-          <button (click)="toggleAddQuestionDialog(false)" mat-button>Cancel</button>
-          <button (click)="createNewQuestion(questionName.value)" cdkFocusInitial mat-button>Ok</button>
-        </mat-dialog-actions>
-      </ng-template>
-
+      <app-single-input-dialog
+        (outputInput)="createNewQuestion($event)"
+        [inputLabel]="'Question name'"
+        [title]="'Add question'">
+      </app-single-input-dialog>
     </div>
 
 

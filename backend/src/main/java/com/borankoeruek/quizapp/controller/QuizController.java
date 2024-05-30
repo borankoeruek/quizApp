@@ -24,7 +24,7 @@ public class QuizController {
 		return quizService.getAll();
 	}
 
-	@PostMapping("/api/quiz")
+	@PostMapping("/api/create-quiz")
 	public void set(@RequestBody Quiz quiz) {
 		quizService.set(quiz);
 	}

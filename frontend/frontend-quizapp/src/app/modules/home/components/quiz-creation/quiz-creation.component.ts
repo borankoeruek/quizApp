@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Question } from '../../../../../backend-model/Question';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +12,7 @@ import { SingleInputDialogComponent } from '../single-input-dialog/single-input-
 import { QuizAnswerCreationDialogComponent } from '../quiz-answer-creation-dialog/quiz-answer-creation-dialog.component';
 import { QuizHttpService } from '../../services/quiz-http.service';
 import { Quiz } from '../../../../../backend-model/Quiz';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-quiz-creation',
@@ -13,8 +20,11 @@ import { Quiz } from '../../../../../backend-model/Quiz';
   styleUrl: './quiz-creation.component.css',
 })
 export class QuizCreationComponent implements OnInit {
+  @Output()
+  public createdQuiz: EventEmitter<void> = new EventEmitter<void>();
   public formGroup: FormGroup;
-  @Output() createdQuiz: EventEmitter<void> = new EventEmitter<void>();
+  @ViewChild('stepper')
+  private stepper: MatStepper;
 
   constructor(
     private dialog: MatDialog,
@@ -30,7 +40,7 @@ export class QuizCreationComponent implements OnInit {
   }
 
   public openAnswerCreationDialog(question: Question): void {
-    const dialogRef = this.dialog.open(QuizAnswerCreationDialogComponent, {
+    this.dialog.open(QuizAnswerCreationDialogComponent, {
       data: {
         question,
       },
@@ -46,8 +56,6 @@ export class QuizCreationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
-
       if (result) {
         this.createNewQuestion(result);
       }
@@ -70,8 +78,8 @@ export class QuizCreationComponent implements OnInit {
     quiz.questions = questions;
     this.quizHttpService.createQuiz(quiz).subscribe({
       next: () => {
-        console.log('successfully created a new quiz');
         this.createdQuiz.emit();
+        this.stepper.reset();
       },
       error: (err) => {
         console.log('Got a error while creating a new quiz', err);

@@ -1,6 +1,6 @@
-<h4>Create a Quiz!</h4>
+<h4 class="ms-4">Create a Quiz!</h4>
 
-<mat-stepper #stepper class="h-100" linear>
+<mat-stepper #stepper linear>
   <mat-step [stepControl]="formGroup" label="Fill out your quiz name">
     <ng-template matStepLabel>asdsa</ng-template>
 
@@ -32,14 +32,6 @@
     </div>
 
 
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button (click)="saveCreatedQuiz()" mat-button>Create</button>

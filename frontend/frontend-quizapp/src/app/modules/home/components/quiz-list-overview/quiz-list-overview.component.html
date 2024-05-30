@@ -6,6 +6,6 @@
     </mat-selection-list>
   </div>
   <div class="d-flex col-9 align-items-center justify-content-center">
-    <app-quiz-creation class="w-100"></app-quiz-creation>
+    <app-quiz-creation (createdQuiz)="fetchQuizList()" class="w-100 h-100"></app-quiz-creation>
   </div>
 </div>

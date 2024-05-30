@@ -1,28 +1,38 @@
 <h2 mat-dialog-title>Add question </h2>
-<mat-dialog-content>
-  <div class="d-flex">
+<mat-dialog-content class="dialog">
 
-    <div class="col-11"></div>
-    <mat-selection-list>
-      <mat-list-item
-        *ngFor="let answer of question.answers">{{ answer.name }}
+  <mat-selection-list>
+    <mat-list-item
+      *ngFor="let answer of data.question.answers">
+      <div class="d-flex justify-content-between">
+      <span>
 
-        <ng-template>
+        {{ answer.name }}
+        </span>
 
-        </ng-template>
-      </mat-list-item>
+        <mat-checkbox [(ngModel)]="answer.isValid">Valid
 
-      <div class="d-flex w-100 justify-content-end">
-        <button (click)="(true)" aria-label="Add new question" color="primary" mat-icon-button>
-          <mat-icon>add_circle</mat-icon>
-        </button>
+        </mat-checkbox>
       </div>
 
-    </mat-selection-list>
-  </div>
+
+    </mat-list-item>
+
+    <div class="d-flex w-100 justify-content-end align-items-baseline">
+      <mat-form-field class="w-100">
+        <mat-label>Answer</mat-label>
+        <input #inputElement matInput placeholder="Name">
+      </mat-form-field>
+
+      <button (click)="addNewAnswer(inputElement.value)" aria-label="Add new answer" color="primary"
+              mat-icon-button>
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+
+  </mat-selection-list>
 
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button (click)="(false)" mat-button>Cancel</button>
-  <button cdkFocusInitial mat-button>Ok</button>
+<mat-dialog-actions align="end">
+  <button (click)="onClose()" cdkFocusInitial mat-button>Ok</button>
 </mat-dialog-actions>

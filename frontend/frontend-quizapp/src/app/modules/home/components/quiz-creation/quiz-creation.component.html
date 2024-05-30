@@ -1,12 +1,13 @@
 <h4>Create a Quiz!</h4>
 
-<mat-stepper #stepper linear>
-  <mat-step [stepControl]="formGroup">
+<mat-stepper #stepper class="h-100" linear>
+  <mat-step [stepControl]="formGroup" label="Fill out your quiz name">
+    <ng-template matStepLabel>asdsa</ng-template>
+
     <form [formGroup]="formGroup">
-      <ng-template matStepLabel>Fill out your quiz name</ng-template>
-      <mat-form-field>
+      <mat-form-field class="w-100">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput placeholder="name" required>
+        <input formControlName="name" matInput placeholder="Name" required>
       </mat-form-field>
       <div class="d-flex justify-content-end">
         <button mat-button matStepperNext>Next</button>
@@ -17,23 +18,17 @@
     <div class="d-flex">
       <div class="col-9">
         <mat-selection-list>
-          <mat-list-item (click)="loadQuestionToSidebar(question)"
+          <mat-list-item (click)="openAnswerCreationDialog(question)"
                          *ngFor="let question of questionList">{{ question.name }}
           </mat-list-item>
         </mat-selection-list>
       </div>
+
       <div class="d-flex w-100 justify-content-end">
-        <button (click)="toggleAddQuestionDialog(true)" aria-label="Add new question" color="primary" mat-icon-button>
+        <button (click)="openAddQuestionDialog()" aria-label="Add new question" color="primary" mat-icon-button>
           <mat-icon>add_circle</mat-icon>
         </button>
       </div>
-
-
-      <app-single-input-dialog
-        (outputInput)="createNewQuestion($event)"
-        [inputLabel]="'Question name'"
-        [title]="'Add question'">
-      </app-single-input-dialog>
     </div>
 
 
@@ -47,7 +42,7 @@
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button (click)="stepper.reset()" mat-button>Reset</button>
+      <button (click)="saveCreatedQuiz()" mat-button>Create</button>
     </div>
   </mat-step>
 </mat-stepper>

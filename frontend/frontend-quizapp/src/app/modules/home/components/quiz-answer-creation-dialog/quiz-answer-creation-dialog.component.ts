@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Question } from '../../../../../backend-model/Question';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Answer } from '../../../../../backend-model/Answer';
 
 @Component({
   selector: 'app-quiz-answer-creation-dialog',
@@ -7,6 +9,29 @@ import { Question } from '../../../../../backend-model/Question';
   styleUrl: './quiz-answer-creation-dialog.component.css',
 })
 export class QuizAnswerCreationDialogComponent {
-  @Input()
-  public question: Question;
+  constructor(
+    private dialogRef: MatDialogRef<QuizAnswerCreationDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: { question: Question },
+  ) {}
+
+  public addNewAnswer(answerName: string): void {
+    const answer = new Answer();
+    answer.name = answerName;
+    this.data.question.answers.push(answer);
+  }
+
+  public toggleValidity(answerId: string, isValid: boolean): void {
+    const answer = this.data.question.answers.find(
+      (answer) => answer.id === answerId,
+    );
+
+    if (answer) {
+      answer.isValid = isValid;
+    }
+  }
+
+  public onClose(): void {
+    this.dialogRef.close();
+  }
 }

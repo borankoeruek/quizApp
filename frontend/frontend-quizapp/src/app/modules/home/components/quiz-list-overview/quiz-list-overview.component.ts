@@ -13,6 +13,10 @@ export class QuizListOverviewComponent implements OnInit {
   constructor(private quizHttpService: QuizHttpService) {}
 
   ngOnInit(): void {
+    this.fetchQuizList();
+  }
+
+  public fetchQuizList(): void {
     this.quizHttpService
       .fetchAllQuiz()
       .subscribe((quizList) => (this.quizList = quizList));

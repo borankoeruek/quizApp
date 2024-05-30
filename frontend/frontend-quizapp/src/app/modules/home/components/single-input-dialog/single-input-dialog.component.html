@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>{{ title }}</h2>
+<h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>{{ inputLabel }}</mat-label>
-    <input #input matInput placeholder={{inputLabel}}>
+    <mat-label>{{ data.inputLabel }}</mat-label>
+    <input #inputElement matInput placeholder="{{data.inputLabel}}">
   </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button (click)="closeDialog()" mat-button>Cancel</button>
-  <button (click)="outputInput.emit(input.value)" cdkFocusInitial mat-button>Ok</button>
+<mat-dialog-actions align="end">
+  <button (click)="onClose()" mat-button>Cancel</button>
+  <button (click)="onClose(inputElement.value)" cdkFocusInitial mat-button>Ok</button>
 </mat-dialog-actions>

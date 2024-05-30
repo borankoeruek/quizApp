@@ -14,4 +14,8 @@ export class QuizHttpService {
   public fetchAllQuiz(): Observable<Quiz[]> {
     return this.http.get<Quiz[]>(`${this.BACKEND_URL}/all-quiz`);
   }
+
+  public createQuiz(quiz: Quiz): Observable<void> {
+    return this.http.post<void>(`${this.BACKEND_URL}/create-quiz`, quiz);
+  }
 }

@@ -88,7 +88,7 @@ export class QuizCreationComponent implements OnInit {
   }
 
   public atLeastTwoQuestionsCreated(): boolean {
-    if (this.questionList?.length === 0) {
+    if (!this.questionList || this.questionList.length === 0) {
       return false;
     }
     return this.questionList.every(

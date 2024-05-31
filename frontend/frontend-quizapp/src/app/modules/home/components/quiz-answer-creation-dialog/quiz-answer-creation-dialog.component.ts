@@ -21,7 +21,7 @@ export class QuizAnswerCreationDialogComponent {
     }
     const answer = new Answer();
     answer.name = answerName;
-    answer.isValid = false;
+    answer.valid = false;
     this.data.question.answers.push(answer);
   }
 

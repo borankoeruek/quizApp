@@ -12,7 +12,9 @@ import { Answer } from '../../backend-model/Answer';
 })
 export class SolveQuizComponent implements OnInit {
   public currentStepCorrectAnswers: Answer[] = [];
-  public resettedQuiz: Quiz;
+  public shouldShowCurrentStepResults: boolean = false;
+  public correctQuestionsCounter: number = 0;
+  public quizWithAnswersRemoved: Quiz;
   private originalQuiz: Quiz;
   @ViewChild('stepper')
   private stepper: MatStepper;
@@ -22,12 +24,9 @@ export class SolveQuizComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) {}
 
-  get shouldShowResults(): boolean {
-    return this.currentStepCorrectAnswers.length > 0;
-  }
-
-  public resetShowedResults(): void {
+  public resetCurrentStepResults(): void {
     this.currentStepCorrectAnswers = [];
+    this.shouldShowCurrentStepResults = false;
   }
 
   public ngOnInit(): void {
@@ -35,25 +34,36 @@ export class SolveQuizComponent implements OnInit {
       const quizId = params['quizId'];
 
       this.quizHttpService.fetchQuizById(quizId).subscribe((quiz) => {
-        this.resettedQuiz = quiz;
-        this.removeAnswers(this.resettedQuiz);
         this.originalQuiz = structuredClone(quiz);
+
+        this.quizWithAnswersRemoved = quiz;
+        this.removeAnswers(this.quizWithAnswersRemoved);
       });
     });
   }
 
-  public showResult(): void {
+  public showCurrentStepResult(): void {
     const currentQuestion =
-      this.resettedQuiz.questions[this.stepper.selectedIndex];
+      this.quizWithAnswersRemoved.questions[this.stepper.selectedIndex];
     const currentQuestionOriginal =
       this.originalQuiz.questions[this.stepper.selectedIndex];
 
+    console.log(currentQuestionOriginal);
+
     // determine correct answers
     currentQuestion.answers.forEach((answer: Answer, index: number) => {
-      if (answer.isValid === currentQuestionOriginal.answers[index].isValid) {
+      if (answer.valid === currentQuestionOriginal.answers[index].valid) {
         this.currentStepCorrectAnswers.push(answer);
       }
     });
+
+    if (
+      currentQuestion.answers.length === this.currentStepCorrectAnswers.length
+    ) {
+      this.correctQuestionsCounter++;
+    }
+
+    this.shouldShowCurrentStepResults = true;
   }
 
   public isAnswerCorrect(answer: Answer): boolean {
@@ -65,7 +75,7 @@ export class SolveQuizComponent implements OnInit {
   private removeAnswers(quiz: Quiz): void {
     quiz.questions.forEach((question) => {
       question.answers.forEach((answer) => {
-        answer.isValid = false;
+        answer.valid = false;
       });
     });
   }

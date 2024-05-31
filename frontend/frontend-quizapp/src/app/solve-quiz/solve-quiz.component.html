@@ -1,8 +1,8 @@
-<div *ngIf="resettedQuiz">
-  <h4 class="ms-4">Solve Quiz: {{ resettedQuiz.name }}</h4>
+<div *ngIf="quizWithAnswersRemoved">
+  <h4 class="ms-4">Solve Quiz: {{ quizWithAnswersRemoved.name }}</h4>
 
   <mat-stepper #stepper orientation="vertical">
-    <mat-step *ngFor="let question of resettedQuiz.questions" [label]="question.name">
+    <mat-step *ngFor="let question of quizWithAnswersRemoved.questions" [label]="question.name">
       <h6>{{ question.name }}</h6>
 
       <mat-selection-list>
@@ -10,24 +10,30 @@
           <div class="d-flex justify-content-between">
           <span
             [ngClass]="{
-              'show-answer': shouldShowResults,
+              'show-answer': shouldShowCurrentStepResults,
               'wrong-answer': !isAnswerCorrect(answer),
               'correct-answer': isAnswerCorrect(answer)
             }"
           >
             {{ answer.name }}
           </span>
-            <mat-checkbox [(ngModel)]="answer.isValid" [disabled]="shouldShowResults"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="answer.valid" [disabled]="shouldShowCurrentStepResults"></mat-checkbox>
           </div>
         </mat-list-item>
       </mat-selection-list>
 
       <div>
-        <button (click)="showResult()" *ngIf="!shouldShowResults" mat-button>Show result</button>
-        <button (click)="resetShowedResults()" *ngIf="shouldShowResults" mat-button matStepperNext>Next
+        <button (click)="showCurrentStepResult()" *ngIf="!shouldShowCurrentStepResults" mat-button>Show result</button>
+        <button (click)="resetCurrentStepResults()" *ngIf="shouldShowCurrentStepResults" mat-button matStepperNext>Next
         </button>
 
       </div>
+    </mat-step>
+    <mat-step>
+      <h5>Results: {{ correctQuestionsCounter }}/{{ quizWithAnswersRemoved.questions.length }}</h5>
+
+      <a [routerLink]="'/home'">Solve another quiz!</a>
+
     </mat-step>
   </mat-stepper>
 </div>

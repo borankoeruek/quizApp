@@ -1,42 +1,43 @@
 package com.borankoeruek.quizapp.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Quiz {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
 
-    private String name;
+	private String name;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Question> questions;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Question> questions;
 
-    // Getters and Setters
-    public UUID getId() {
-        return id;
-    }
+	// Getters and Setters
+	public UUID getId() {
+		return id;
+	}
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
+	public List<Question> getQuestions() {
+		return questions;
+	}
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 }

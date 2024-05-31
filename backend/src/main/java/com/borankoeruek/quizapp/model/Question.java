@@ -1,54 +1,43 @@
 package com.borankoeruek.quizapp.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
 
-    private String name;
+	private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Answer> answers;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answers;
+	// Getters and Setters
+	public UUID getId() {
+		return id;
+	}
 
-    // Getters and Setters
-    public UUID getId() {
-        return id;
-    }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public List<Answer> getAnswers() {
+		return answers;
+	}
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
 }

@@ -2,7 +2,7 @@
   <div class="col-3 border-end">
     <h3>Quizzes</h3>
     <mat-selection-list>
-      <mat-list-item (click)="test(quiz)" *ngFor="let quiz of quizList">{{ quiz.name }}</mat-list-item>
+      <mat-list-item (click)="openQuizSolver(quiz)" *ngFor="let quiz of quizList">{{ quiz.name }}</mat-list-item>
     </mat-selection-list>
   </div>
   <div class="d-flex col-9 align-items-center justify-content-center">

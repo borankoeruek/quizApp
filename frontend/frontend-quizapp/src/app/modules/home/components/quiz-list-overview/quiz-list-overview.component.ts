@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../../../../../backend-model/Quiz';
 import { QuizHttpService } from '../../services/quiz-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-list',
@@ -10,7 +11,10 @@ import { QuizHttpService } from '../../services/quiz-http.service';
 export class QuizListOverviewComponent implements OnInit {
   public quizList: Quiz[];
 
-  constructor(private quizHttpService: QuizHttpService) {}
+  constructor(
+    private quizHttpService: QuizHttpService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.fetchQuizList();
@@ -22,7 +26,7 @@ export class QuizListOverviewComponent implements OnInit {
       .subscribe((quizList) => (this.quizList = quizList));
   }
 
-  public test(l: any) {
-    console.log(l);
+  public openQuizSolver(quiz: Quiz) {
+    this.router.navigate(['/home/solve', quiz.id]);
   }
 }

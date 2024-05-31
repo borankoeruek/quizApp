@@ -18,4 +18,8 @@ export class QuizHttpService {
   public createQuiz(quiz: Quiz): Observable<void> {
     return this.http.post<void>(`${this.BACKEND_URL}/create-quiz`, quiz);
   }
+
+  public fetchQuizById(quizId: string): Observable<Quiz> {
+    return this.http.get<Quiz>(`${this.BACKEND_URL}/quiz/${quizId}`);
+  }
 }

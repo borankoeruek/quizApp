@@ -6,12 +6,9 @@
       *ngFor="let answer of data.question.answers">
       <div class="d-flex justify-content-between">
       <span>
-
         {{ answer.name }}
         </span>
-
         <mat-checkbox [(ngModel)]="answer.isValid">Valid
-
         </mat-checkbox>
       </div>
 

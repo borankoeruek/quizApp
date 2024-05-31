@@ -18,17 +18,8 @@ export class QuizAnswerCreationDialogComponent {
   public addNewAnswer(answerName: string): void {
     const answer = new Answer();
     answer.name = answerName;
+    answer.isValid = false;
     this.data.question.answers.push(answer);
-  }
-
-  public toggleValidity(answerId: string, isValid: boolean): void {
-    const answer = this.data.question.answers.find(
-      (answer) => answer.id === answerId,
-    );
-
-    if (answer) {
-      answer.isValid = isValid;
-    }
   }
 
   public onClose(): void {

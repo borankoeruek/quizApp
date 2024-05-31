@@ -17,6 +17,7 @@ import {
 import { QuizAnswerCreationDialogComponent } from './components/quiz-answer-creation-dialog/quiz-answer-creation-dialog.component';
 import { SingleInputDialogComponent } from './components/single-input-dialog/single-input-dialog.component';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { SolveQuizComponent } from './components/solve-quiz/solve-quiz.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
     QuizCreationComponent,
     QuizAnswerCreationDialogComponent,
     SingleInputDialogComponent,
+    SolveQuizComponent,
   ],
   imports: [
     CommonModule,

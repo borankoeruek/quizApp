@@ -2,12 +2,11 @@
 
 <mat-stepper #stepper linear>
   <mat-step [stepControl]="formGroup" label="Fill out your quiz name">
-    <ng-template matStepLabel>asdsa</ng-template>
-
     <form [formGroup]="formGroup">
       <mat-form-field class="w-100">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput placeholder="Name" required>
+        <input formControlName="name" matInput placeholder="Name">
+        <mat-error>Required</mat-error>
       </mat-form-field>
       <div class="d-flex justify-content-end">
         <button mat-button matStepperNext>Next</button>
@@ -22,10 +21,13 @@
                          *ngFor="let question of questionList">{{ question.name }}
           </mat-list-item>
         </mat-selection-list>
+        <mat-error *ngIf="!atLeastTwoQuestionsCreated()">At least one question with two answers are required</mat-error>
+
       </div>
 
       <div class="d-flex w-100 justify-content-end">
-        <button (click)="openAddQuestionDialog()" aria-label="Add new question" color="primary" mat-icon-button>
+        <button (click)="openAddQuestionDialog()"
+                aria-label="Add new question" color="primary" mat-icon-button>
           <mat-icon>add_circle</mat-icon>
         </button>
       </div>
@@ -34,7 +36,7 @@
 
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button (click)="saveCreatedQuiz()" mat-button>Create</button>
+      <button (click)="saveCreatedQuiz()" [disabled]="!atLeastTwoQuestionsCreated()" mat-button>Create</button>
     </div>
   </mat-step>
 </mat-stepper>

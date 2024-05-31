@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Quiz } from '../../../../../backend-model/Quiz';
-import { QuizHttpService } from '../../services/quiz-http.service';
+import { Quiz } from '../../backend-model/Quiz';
+import { QuizHttpService } from '../modules/home/services/quiz-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
-import { Answer } from '../../../../../backend-model/Answer';
+import { Answer } from '../../backend-model/Answer';
 
 @Component({
   selector: 'app-solve-quiz',

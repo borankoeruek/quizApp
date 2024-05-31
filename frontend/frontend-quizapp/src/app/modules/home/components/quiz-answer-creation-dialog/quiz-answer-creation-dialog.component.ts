@@ -16,6 +16,9 @@ export class QuizAnswerCreationDialogComponent {
   ) {}
 
   public addNewAnswer(answerName: string): void {
+    if (!answerName) {
+      return;
+    }
     const answer = new Answer();
     answer.name = answerName;
     answer.isValid = false;

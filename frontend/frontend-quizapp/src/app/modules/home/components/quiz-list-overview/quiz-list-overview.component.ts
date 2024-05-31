@@ -27,6 +27,6 @@ export class QuizListOverviewComponent implements OnInit {
   }
 
   public openQuizSolver(quiz: Quiz) {
-    this.router.navigate(['/home/solve', quiz.id]);
+    this.router.navigate(['/solve', quiz.id]);
   }
 }

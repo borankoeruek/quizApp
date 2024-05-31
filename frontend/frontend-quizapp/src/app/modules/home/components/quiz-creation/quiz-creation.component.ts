@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Question } from '../../../../../backend-model/Question';
 import { MatDialog } from '@angular/material/dialog';
 import { SingleInputDialogComponent } from '../single-input-dialog/single-input-dialog.component';
@@ -31,8 +31,8 @@ export class QuizCreationComponent implements OnInit {
     private quizHttpService: QuizHttpService,
   ) {}
 
-  get questionList() {
-    return this.formGroup.get('questions')?.value;
+  get questionList(): Question[] {
+    return this.formGroup.get('questions')?.value as Question[];
   }
 
   public ngOnInit(): void {
@@ -71,7 +71,7 @@ export class QuizCreationComponent implements OnInit {
 
   public saveCreatedQuiz(): void {
     const name = this.formGroup.get('name')?.value;
-    const questions = this.formGroup.get('questions')?.value;
+    const questions = this.questionList;
 
     const quiz = new Quiz();
     quiz.name = name;
@@ -87,9 +87,19 @@ export class QuizCreationComponent implements OnInit {
     });
   }
 
+  public atLeastTwoQuestionsCreated(): boolean {
+    if (this.questionList?.length === 0) {
+      return false;
+    }
+    return this.questionList.every(
+      (question: Question) => question.answers.length >= 2,
+    );
+  }
+
   private initFormGroup(): void {
+    // TODO: It should be an form array but to keep it simple i continue it like this and add a custom validation
     this.formGroup = new FormGroup({
-      name: new FormControl<string>(''),
+      name: new FormControl<string>('', Validators.required),
       questions: new FormControl<Question[]>([]),
     });
   }

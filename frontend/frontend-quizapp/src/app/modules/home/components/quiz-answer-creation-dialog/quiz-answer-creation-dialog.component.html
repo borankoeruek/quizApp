@@ -18,7 +18,7 @@
     <div class="d-flex w-100 justify-content-end align-items-baseline">
       <mat-form-field class="w-100">
         <mat-label>Answer</mat-label>
-        <input #inputElement matInput placeholder="Name">
+        <input #inputElement matInput placeholder="Name" required>
       </mat-form-field>
 
       <button (click)="addNewAnswer(inputElement.value)" aria-label="Add new answer" color="primary"

@@ -3,7 +3,7 @@
 <mat-stepper #stepper linear>
   <mat-step [stepControl]="formGroup" label="Fill out your quiz name">
     <form [formGroup]="formGroup">
-      <mat-form-field class="w-100">
+      <mat-form-field class="w-100 mt-2">
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput placeholder="Name">
         <mat-error>Required</mat-error>
@@ -14,14 +14,16 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="formGroup" label="Create questions">
-    <div class="d-flex">
+    <div class="d-flex mt-2">
       <div class="col-9">
         <mat-selection-list>
           <mat-list-item (click)="openAnswerCreationDialog(question)"
                          *ngFor="let question of questionList">{{ question.name }}
           </mat-list-item>
         </mat-selection-list>
-        <mat-error *ngIf="!atLeastTwoQuestionsCreated()">At least one question with two answers are required</mat-error>
+        <mat-error *ngIf="!atLeastTwoQuestionsCreated()" class="ms-3">At least one question with two answers are
+          required
+        </mat-error>
 
       </div>
 

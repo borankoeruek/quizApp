@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Question } from '../../../../../backend-model/Question';
 import { MatDialog } from '@angular/material/dialog';
 import { SingleInputDialogComponent } from '../single-input-dialog/single-input-dialog.component';
@@ -13,6 +13,7 @@ import { QuizAnswerCreationDialogComponent } from '../quiz-answer-creation-dialo
 import { QuizHttpService } from '../../services/quiz-http.service';
 import { Quiz } from '../../../../../backend-model/Quiz';
 import { MatStepper } from '@angular/material/stepper';
+import { genericAsyncValidator } from '../../../../util/validator/generic-is-valid.validator';
 
 @Component({
   selector: 'app-quiz-creation',
@@ -99,7 +100,12 @@ export class QuizCreationComponent implements OnInit {
   private initFormGroup(): void {
     // TODO: It should be an form array but to keep it simple i continue it like this and add a custom validation
     this.formGroup = new FormGroup({
-      name: new FormControl<string>('', Validators.required),
+      name: new FormControl<string>(
+        '',
+        genericAsyncValidator(
+          this.quizHttpService.isQuizNamePossible.bind(this.quizHttpService),
+        ),
+      ),
       questions: new FormControl<Question[]>([]),
     });
   }

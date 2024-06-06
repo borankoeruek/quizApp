@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../../../../backend-model/Quiz';
 import { Observable } from 'rxjs';
+import { Valid } from '../../../../backend-model/Valid';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,11 @@ export class QuizHttpService {
 
   public fetchQuizById(quizId: string): Observable<Quiz> {
     return this.http.get<Quiz>(`${this.BACKEND_URL}/quiz/${quizId}`);
+  }
+
+  public isQuizNamePossible(quizName: string): Observable<Valid> {
+    return this.http.get<Valid>(
+      `${this.BACKEND_URL}/quiz/name-check/${quizName}`,
+    );
   }
 }

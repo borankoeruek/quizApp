@@ -23,7 +23,7 @@
 
 - **Backend:** Java Spring Boot for building robust and scalable server-side applications.
 - **Frontend:** Angular for creating a responsive and dynamic user interface.
-- **Database:** MySQL for storing quiz data securely and efficiently.
+- **Database:** PostgreSQL for storing quiz data securely and efficiently.
 - **Authentication:** Spring Security for handling user authentication and authorization.
 - **RESTful API:** Seamless communication between the frontend and backend.
 

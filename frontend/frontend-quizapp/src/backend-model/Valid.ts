@@ -1,3 +1,3 @@
 export class Valid {
-  public isValid: boolean;
+  public valid: boolean;
 }

@@ -6,7 +6,8 @@
       <mat-form-field class="w-100 mt-2">
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput placeholder="Name">
-        <mat-error>Required</mat-error>
+        <mat-error *ngIf="formGroup.get('name')?.hasError('required')">Name is required</mat-error>
+        <mat-error *ngIf="formGroup.get('name')?.hasError('quizNameTaken')">Name is already taken</mat-error>
       </mat-form-field>
       <div class="d-flex justify-content-end">
         <button mat-button matStepperNext>Next</button>
